@@ -93,7 +93,7 @@ export const placeOrderStripe = async (req, res) => {
             productData.push({
                 name: product.name,
                 price: product.offerPrice,
-                quantity: item.quantity
+                quantity: item.quantity,
             });
             return (await acc) + product.offerPrice * item.quantity;
         }, 0)
@@ -195,7 +195,7 @@ export const stripeWebhooks = async (request, response) => {
             break;
         }
 
-        case "payment_intent.failed":{
+        case "payment_intent.payment_failed":{
             const paymentIntent = event.data.object;
             const paymentIntentId = paymentIntent.id;
 
