@@ -9,24 +9,21 @@ const MyOrders = () => {
 
     const fetchMyOrders = async () => {
         try {
-
-            const { data } = await axios.get('/api/order/user')
+            const { data } = await axios.get('/api/order/user');
+            console.log("Fetched Orders:", data.orders); // Add this line
             if (data.success) {
-                setMyOrders(data.orders)
+                setMyOrders(data.orders);
             }
-
         } catch (error) {
             console.log(error);
-
         }
-    }
-
+    };
     useEffect(() => {
+        console.log("User:", user); // Add this line
         if (user) {
-            fetchMyOrders()
+            fetchMyOrders();
         }
-
-    }, [user])
+    }, [user]);
 
     return (
         <div className='mt-16 pb-16'>
