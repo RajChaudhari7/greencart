@@ -217,3 +217,17 @@ export const stripeWebhooks = async (request, response) => {
     }
     response.json({received:true})
 }
+
+// Delete Order: /api/order/:id
+export const deleteOrder = async (req, res) => {
+    try {
+        const orderId = req.params.id;
+        const order = await Order.findByIdAndDelete(orderId);
+        if (!order) {
+            return res.status(404).json({ success: false, message: 'Order not found' });
+        }
+        res.status(200).json({ success: true, message: 'Order deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
