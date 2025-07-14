@@ -1,9 +1,20 @@
 import React from 'react';
 import { assets } from '../assets/assets';
 import { useAppContext } from '../context/AppContext';
+import toast from 'react-hot-toast';
 
 const ProductCard = ({ product }) => {
-    const { currency, addToCart, removeFromCart, cartItems, navigate } = useAppContext();
+    const { currency, addToCart, removeFromCart, cartItems, navigate, isLoggedIn } = useAppContext();
+
+    const handleAddToCart = (e) => {
+        e.stopPropagation();
+        if (isLoggedIn) {
+            addToCart(product._id);
+        } else {
+            toast.error("Please login to add items to the cart.");
+            navigate('/');
+        }
+    };
 
     return product && (
         <div onClick={() => { navigate(`/products/${product.category.toLowerCase()}/${product._id}`); scrollTo(0, 0) }} className="border border-gray-500/20 rounded-md px-3 py-2 bg-white w-full max-w-xs mx-auto">
@@ -25,7 +36,7 @@ const ProductCard = ({ product }) => {
                     </p>
                     <div onClick={(e) => { e.stopPropagation(); }} className="text-primary">
                         {!cartItems[product._id] ? (
-                            <button className="flex items-center justify-center gap-1 bg-primary/10 border border-primary/40 w-[70px] h-[34px] rounded cursor-pointer" onClick={() => addToCart(product._id)}>
+                            <button className="flex items-center justify-center gap-1 bg-primary/10 border border-primary/40 w-[70px] h-[34px] rounded cursor-pointer" onClick={handleAddToCart}>
                                 <img src={assets.cart_icon} alt="cart_icon" className="w-4 h-4" />
                                 <span className="text-sm">Add</span>
                             </button>

@@ -64,3 +64,15 @@ export const changeStock = async (req, res) => {
         res.json({ success: false, message: error.message });
     }
 }
+
+// delete product: /api/product/delete
+export const deleteProduct = async (req, res) => {
+    try {
+        const { id } = req.body;
+        await Product.findByIdAndDelete(id);
+        res.json({ success: true, message: "Product Deleted" });
+    } catch (error) {
+        console.log(error.message);
+        res.json({ success: false, message: error.message });
+    }
+};

@@ -22,6 +22,9 @@ const Orders = () => {
     };
 
     const handleDelete = async (orderId) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this order?");
+        if (!confirmDelete) return;
+
         try {
             const { data } = await axios.delete(`/api/order/${orderId}`);
             if (data.success) {

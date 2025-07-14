@@ -3,7 +3,7 @@ import ProductCard from './ProductCard';
 import { useAppContext } from '../context/AppContext';
 
 const BestSeller = () => {
-    const { products } = useAppContext();
+    const { products, navigate } = useAppContext();
 
     return (
         <div className='mt-16 px-4'>
@@ -14,7 +14,12 @@ const BestSeller = () => {
                         <ProductCard product={product} />
                     </div>
                 ))}
+                
             </div>
+            <div>
+                <button onClick={() => { navigate('/products'); scrollTo(0, 0); }} className='flex justify-center mx-auto cursor-pointer px-12 my-16 py-2.5 border rounded text-primary hover:bg-primary/10 transition'>See More</button>
+            </div>
+            
         </div>
     );
 };
