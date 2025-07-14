@@ -69,7 +69,7 @@ const Orders = () => {
                             <p>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
                             <p>Payment: {order.isPaid ? "Paid" : "Pending"}</p>
                         </div>
-                        <button onClick={() => handleDelete(order._id)} className="text-red-500">
+                        <button onClick={() => handleDelete(order._id)} className="text-red-500 cursor-pointer">
                             <FaTrash />
                         </button>
                     </div>
